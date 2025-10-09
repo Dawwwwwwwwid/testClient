@@ -1,0 +1,10 @@
+[submodule "commons/src/flatbuffers/generated"]
+	path = commons/src/flatbuffers/generated
+	url = https://github.com/UOHHIVE/commons_flatbuffers.git
+[submodule "commons/src/antilatency/sdk"]
+	path = commons/src/antilatency/sdk
+	url = https://github.com/AntilatencySDK/Release_4.5.0.git
+	branch = subset-50b2bbfa3e7cf96d777680941be4887a30ce0616
+[submodule "libs/clarp"]
+	path = libs/clarp
+	url = https://github.com/ash-entwisle/clarp-csharp.git

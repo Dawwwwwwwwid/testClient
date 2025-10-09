@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>HIVE.Commons</Title>
+    <Company>UoH-HIVE</Company>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>9.0</LangVersion> <!-- TODO: Find a fix, -->
+    <Nullable>disable</Nullable>
+    <!-- <ImplicitUsings>enable</ImplicitUsings> -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute> 
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.FlatBuffers" Version="24.12.23" />
+    <!-- <PackageReference Include="LeForg.Clarp" Version="1.2.1" /> -->
+    <!-- <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageReference Include="MSTest" Version="3.8.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.8.2" /> -->
+  </ItemGroup>
+
+  <ItemGroup><!-- <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" /> -->
+  
+    <ProjectReference Include="..\libs\clarp\clarp\clarp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\libs\unity\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+
+    <Reference Include="Unity.VisualScripting.Core">
+      <HintPath>..\libs\unity\Unity.VisualScripting.Core.dll</HintPath>
+    </Reference>
+
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\libs\unity\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\libs\unity\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

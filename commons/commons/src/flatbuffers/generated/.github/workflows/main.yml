@@ -1,0 +1,40 @@
+name: Push commit
+on: 
+  push:
+    paths:
+      - commons.fbs
+      - .github/workflows/*
+permissions:
+  contents: write
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Deps
+        run: |
+            sudo apt update -y
+            sudo apt install make cmake unzip -y
+      - name: Clean Files
+        run: |
+            git rm -rf *.h HiveCommon/ || exit 0
+
+            if [ -f flatc.zip ]; then git rm flatc.zip; fi
+            if [ -f flatc ]; then git rm flatc; fi
+      - name: Install flatc
+        run: |
+            curl -sSfL https://github.com/google/flatbuffers/releases/download/v24.12.23/Linux.flatc.binary.clang++-18.zip -o flatc.zip
+            unzip flatc.zip
+            sudo chmod +x flatc
+      - name: Build Files
+        run: ./flatc --gen-object-api --gen-mutable --cpp --csharp commons.fbs
+      - name: Commit report
+        run: |
+          rm flatc.zip
+          rm flatc
+          
+          git config --global user.name 'FlatBuf Auto-Build'
+          git config --global user.email 'action@github.com'
+          git add * || exit 0
+          git commit -am "automated: build action" || exit 0
+          git push

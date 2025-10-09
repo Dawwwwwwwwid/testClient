@@ -1,0 +1,128 @@
+
+:root {
+  --col-white: rgb(255, 255, 255);
+  --col-light-blue: rgb(130, 218, 244);
+  --col-mid-blue: rgb(29, 76, 242);
+  --col-ink-blue: rgb(14, 22, 71);
+  --col-chartruese: rgb(215, 247,199);
+  --col-light-pink: rgb(245, 182, 220);
+  --col-light-aqua: rgb(122, 227, 202);
+  --col-light-orange: rgb(255, 199, 122);
+  --col-light-purple: rgb(168, 164, 238);
+
+  --font-family-primary: "Roboto", sans-serif;
+  --font-family-mono: "Roboto Mono", monospace;
+
+  font: normal normal "Roboto", sans-serif;
+}
+
+.roboto-normal {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.roboto-mono-normal {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.sidefilter,
+.sidetoc,
+#toc {
+  color: var(--col-ink-blue);
+  background-color: var(--col-white);
+  border-left: transparent 1px solid;
+}
+
+.navbar-default,
+.navbar,
+.navbar-collapse {
+  border-color: rgba(var(--col-ink-blue), 0.2);
+}
+
+.toc-filter {
+  border: 1px solid rgba(var(--col-ink-blue), 0.2);
+}
+
+.navbar .navbar-nav>.active>a,
+.navbar .navbar-nav>li>a {
+  color: var(--col-ink-blue);
+  background-color: var(--col-white);
+}
+
+.navbar .navbar-nav>.active>a:focus,
+.navbar .navbar-nav>.active>a:hover,
+.navbar .navbar-nav>li>a:hover {
+  color: rgba(var(--col-mid-blue), 1);
+  background-color: rgba(var(--col-ink-blue), 0.1);
+}
+
+.grad-bottom {
+  height: 0px;
+}
+
+.footer {
+  background-color: var(--col-white);
+}
+
+.navbar-brand>img {
+  padding: 10px 15px;
+  height: 50px;
+}
+
+.sidetoc.shiftup {
+  bottom: 0px;
+}
+
+.sidetoc {
+  top: 110px;
+}
+
+.sidefilter {
+  top: 50px;
+}
+
+.icon-bar {
+  background-color: var(--col-ink-blue);
+}
+
+.btn {
+  text-align: left;
+}
+
+.sidenav,
+.fixed_header,
+.toc {
+  background-color: var(--col-white);
+}
+
+.toc>ul {
+  text-align: left;
+}
+
+body {
+
+  color: var(--col-ink-blue);
+  font-family: var(--font-family-primary);
+
+
+  font-size: 16px;
+}
+
+header {
+  background-color: var(--col-white);
+}
+
+.toc .nav>li {
+  display: block;
+}
+
+.toc li:after {
+  content: "";
+}

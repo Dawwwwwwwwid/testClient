@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageID>LeForg.Clarp</PackageID>
+    <Title>Clarp</Title>
+    <Version>1.2.1</Version>
+    <Authors>Ash Entwisle</Authors>
+    <Description>Clarp is a C# library for parsing command line arguments.</Description>
+    <Company>LeForg</Company>
+    <Product>Clarp</Product>
+    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+    <Copyright>Copyright 2025 LeForg CC BY-SA</Copyright>
+    <ProjectURL>https://github.com/ash-entwisle/clarp-csharp</ProjectURL>
+    <RepositoryURL>https://github.com/ash-entwisle/clarp-csharp</RepositoryURL>
+    <PackageTags>command-line arguments parsing</PackageTags>
+    <PackageReleaseNotes>Updated version to match ts</PackageReleaseNotes>
+  </PropertyGroup>
+
+      <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+
+</Project>

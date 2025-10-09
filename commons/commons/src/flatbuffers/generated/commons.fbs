@@ -1,0 +1,197 @@
+namespace HIVE.Commons.Flatbuffers.Generated;
+
+// type smth here and commit to trigger build: 
+
+// Defines a position in 3D space.
+struct Vec3 {
+	x:float;
+	y:float;
+	z:float;
+}
+
+// Defines a quaternion.
+struct Vec4 {
+	w:float;
+	x:float;
+	y:float;
+	z:float;
+}
+
+// Defines a bounding box.
+table BoundingBox {
+	centre:Vec3;
+	dimensions:Vec3;
+	rotation:Vec4;
+	ellipsoid:bool = false;
+}
+
+// Defines a node that corresponds to either an Antilatency tracking node in physical space, or an abstract node in virtual space
+// The unique identifier is the Antilatency hardware id, or randomly generated
+table Node {
+	id:uint64;
+	position:Vec3;
+	rotation:Vec4;
+	velocity:Vec3;
+	error:float;
+}
+
+// Defines rates for subscription updates from the server.
+// Rates are relative to the server cadence.
+enum SubscriptionRate : byte {
+	None = 0,
+	Full,  
+	Half,  
+	Quarter
+}
+
+// Defines a generic entity e.g. Any tracked physical object
+// Can be used to prototype new physical entities
+table Generic {
+	id:uint64;
+	name:string;
+	subscription:uint16;
+	rate:SubscriptionRate; 
+	bounding_box:BoundingBox;
+}
+
+// Defines a robot entity e.g. Zumo
+// These are visible to the robot orchestrator
+// Colour is represented as RGBA.
+table Robot {
+	id:uint64;
+	name:string;
+	subscription:uint16;
+	rate:SubscriptionRate; 
+	bounding_box:BoundingBox;
+	colour:uint32;
+}
+
+// Defines a headset entity e.g. Quest 3
+table Headset {
+	id:uint64;
+	name:string;
+	subscription:uint16;
+	rate:SubscriptionRate; 
+	bounding_box:BoundingBox;
+}
+
+// Defines a presenter entity e.g. Application running on the large monitors in HIVE
+// These provide a view of the world, but have no defined physical or virtual location
+table Presenter {
+	id:uint64;
+	name:string;
+	subscription:uint16;
+	rate:SubscriptionRate; 
+}
+
+// Defines a geometry entity e.g. A unity graphical object
+// These are entirely virtual objects
+table Geometry {
+	id:uint64;
+	name:string;
+	owner_id:uint64;
+	exclusive:bool;
+	bounding_box:BoundingBox;
+}
+
+// Defines a generic observer entity 
+// These provide a view of the world, but have no defined physical or virtual location
+table Observer {
+	id:uint64;
+	name:string;
+	subscription:uint16;
+	rate:SubscriptionRate; 
+}
+
+// Defines owner control command
+// Two levels of ownership
+// Open: owner has control, that can be taken by another
+// Exclusive: owner has contol, that cannot be taken by another
+enum OwnershipStatus : byte {
+	None=0,
+	Open,  
+	Exclusive
+}
+
+table Owner {
+	id:uint64;
+	family:uint16;
+	owner_id:uint64;
+	status:OwnershipStatus;
+}
+
+// Defines the move to command
+table MoveTo {
+	id:uint64;
+	family:uint16;
+	destination:Vec3;
+}
+
+// Defines the sleep command
+// duration < 0, target stops
+// sleep = false, target wakes up
+table Sleep {
+	id:uint64;
+	family:uint16;
+	duration:float;
+	sleep:bool;
+}
+
+// Defines a union to merge all commands
+union CommandUnion {
+	Owner,
+	MoveTo,
+	Sleep
+}
+
+// Parent class for all commands
+table Command {
+	command:CommandUnion;
+}
+
+// Defines types of subscriptions.  
+// Subscriptions are encoded as bit shifts within the subscription fields within Entities
+// IMPORTANT -- Must be in the same order as EntityUnion, with Generic as the 2nd entry
+// DataCentre compiler will check for compliance
+enum SubscriptionType : byte {
+	None = 0,
+	Generic,
+	Robot,    
+	Headset,
+	Presenter,
+	Geometry,
+	Observer,
+	Own
+}
+
+// Defines a union to merge all entities
+// IMPORTANT -- Must be in the same order as SubscriptionType, with Generic as the 1st entry
+// DataCentre compiler will check for compliance
+union EntityUnion {
+	Generic,
+	Robot, 
+	Headset, 
+	Presenter,
+	Geometry,
+	Observer,
+	Command,
+	Node
+}
+
+// Parent class for all entities
+table Entity {
+	entity:EntityUnion;
+}
+
+// Defines the single data type within the main message
+// Contains a single Entity encoded as a blob of data
+table Payload {
+	data:[ubyte] (nested_flatbuffer: "Entity");
+}
+
+// Main message 
+table State {
+	payload:[Payload];    
+}
+
+root_type State;
